@@ -231,7 +231,8 @@ namespace ChoixResto.Models
                 resultat.NombreDeVotes = count;
                 resultats.Add(resultat);
             }
-            
+            resultats.Sort((a, b) => (a.NombreDeVotes.CompareTo(b.NombreDeVotes)));
+            resultats.Reverse();
             return resultats;
         }
     }
