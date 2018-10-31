@@ -1,63 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Data.Entity;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
 
 namespace ChoixResto.Models
 {
-    public class Utilisateur
-    {
-        public int Id { get; set; }
-        [Required]
-        public string Prenom { get; set; }
-        [Required]
-        public string Mdp { get; set; }
-    }
-
-    [Table("Restos")]
-    public class Resto
-    {
-        public int Id { get; set; }
-        [Required]
-        public string Nom { get; set; }
-        public string Telephone { get; set; }
-    }
-
-    public class Vote
-    {
-        public int Id { get; set; }
-        public virtual Resto Resto { get; set; }
-        public virtual Utilisateur Utilisateur { get; set; }
-    }
-
-    public class Sondage
-    {
-        public Sondage()
-        {
-            Date = DateTime.Now;
-            Votes = new List<Vote>();
-        }
-        public int Id { get; set; }
-        public DateTime Date { get; set; }
-        public virtual List<Vote> Votes { get; set; }
-    }
-
-    public class Resultats
-    {
-        public string Nom { get; set; }
-        public string Telephone { get; set; }
-        public int NombreDeVotes { get; set; }
-    }
-
-    public class BddContext : DbContext
-    {
-        public DbSet<Sondage> Sondages { get; set; }
-        public DbSet<Resto> Restos { get; set; }
-        public DbSet<Utilisateur> Utilisateurs { get; set; }
-    }
-
     public class Dal : IDal
     {
         private BddContext bdd;
@@ -207,7 +153,6 @@ namespace ChoixResto.Models
         {
             
             ObtientSondage(idSondage).Votes.Add(new Vote { Resto = ObtientResto(idResto), Utilisateur = ObtenirUtilisateur(idUtilisateur) });
-                
             
         }
 
