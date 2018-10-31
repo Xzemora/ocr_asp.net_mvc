@@ -151,13 +151,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\RestaurantController.cs" />
     <Compile Include="Models\BddContext.cs" />
+    <Compile Include="Models\InitChoixResto.cs" />
     <Compile Include="Models\Resultats.cs" />
     <Compile Include="Models\Sondage.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Dal.cs" />
-    <Compile Include="Models\Interface1.cs" />
+    <Compile Include="Models\IDal.cs" />
     <Compile Include="Models\Resto.cs" />
     <Compile Include="Models\Utilisateur.cs" />
     <Compile Include="Models\Vote.cs" />
@@ -237,7 +238,9 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Restaurant\Index.cshtml" />
+    <Content Include="Views\Restaurant\ModifierRestaurant.cshtml" />
+    <Content Include="Views\Restaurant\CreerRestaurant.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
