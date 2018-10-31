@@ -12,6 +12,6 @@ namespace ChoixResto.Models
         [Required]
         public string Prenom { get; set; }
         [Required]
-        public string Mdp { get; set; }
+        public string MotDePasse { get; set; }
     }
 }

@@ -149,8 +149,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccueilController.cs" />
     <Compile Include="Controllers\RestaurantController.cs" />
     <Compile Include="Models\BddContext.cs" />
+    <Compile Include="Models\DalCorrection.cs" />
+    <Compile Include="Models\DalEnDur.cs" />
     <Compile Include="Models\InitChoixResto.cs" />
     <Compile Include="Models\Resultats.cs" />
     <Compile Include="Models\Sondage.cs" />
@@ -241,6 +244,7 @@
     <Content Include="Views\Restaurant\Index.cshtml" />
     <Content Include="Views\Restaurant\ModifierRestaurant.cshtml" />
     <Content Include="Views\Restaurant\CreerRestaurant.cshtml" />
+    <Content Include="Views\Accueil\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

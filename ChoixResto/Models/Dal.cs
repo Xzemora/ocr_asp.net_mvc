@@ -93,7 +93,7 @@ namespace ChoixResto.Models
 
         public int AjouterUtilisateur(string nom, string mdp)
         {
-            bdd.Utilisateurs.Add(new Utilisateur { Prenom = nom, Mdp = mdp });
+            bdd.Utilisateurs.Add(new Utilisateur { Prenom = nom, MotDePasse = mdp });
             bdd.SaveChanges();
             int idUtilisateur = bdd.Utilisateurs.Count();
             return idUtilisateur;
@@ -104,7 +104,7 @@ namespace ChoixResto.Models
             List<Utilisateur> utilisateurs = bdd.Utilisateurs.ToList();
             for (int i = 0; i < utilisateurs.Count; i++)
             {
-                if (utilisateurs[i].Prenom == prenom && utilisateurs[i].Mdp == mdp)
+                if (utilisateurs[i].Prenom == prenom && utilisateurs[i].MotDePasse == mdp)
                 {
                     return utilisateurs[i];
                 }
