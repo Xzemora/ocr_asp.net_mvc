@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace ChoixResto.Models
 {
@@ -94,7 +96,7 @@ namespace ChoixResto.Models
         public int AjouterUtilisateur(string nom, string mdp)
         {
             string motDePasseEncode = EncodeMD5(mdp);
-            Utilisateur utilisateur = new Utilisateur { Prenom = nom, Mdp = motDePasseEncode };
+            Utilisateur utilisateur = new Utilisateur { Prenom = nom, MotDePasse = motDePasseEncode };
             bdd.Utilisateurs.Add(utilisateur);
             bdd.SaveChanges();
             return utilisateur.Id;
@@ -103,7 +105,7 @@ namespace ChoixResto.Models
         public Utilisateur Authentifier(string prenom, string mdp)
         {
             string motDePasseEncode = EncodeMD5(mdp);
-            return bdd.Utilisateurs.FirstOrDefault(u => u.Prenom == prenom && u.Mdp == motDePasseEncode);
+            return bdd.Utilisateurs.FirstOrDefault(u => u.Prenom == prenom && u.MotDePasse == motDePasseEncode);
         }
 
         public bool ADejaVote(int idSondage, string idUtilisateur)
