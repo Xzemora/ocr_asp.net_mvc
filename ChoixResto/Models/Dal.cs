@@ -93,23 +93,17 @@ namespace ChoixResto.Models
 
         public int AjouterUtilisateur(string nom, string mdp)
         {
-            bdd.Utilisateurs.Add(new Utilisateur { Prenom = nom, MotDePasse = mdp });
+            string motDePasseEncode = EncodeMD5(mdp);
+            Utilisateur utilisateur = new Utilisateur { Prenom = nom, Mdp = motDePasseEncode };
+            bdd.Utilisateurs.Add(utilisateur);
             bdd.SaveChanges();
-            int idUtilisateur = bdd.Utilisateurs.Count();
-            return idUtilisateur;
+            return utilisateur.Id;
         }
 
         public Utilisateur Authentifier(string prenom, string mdp)
         {
-            List<Utilisateur> utilisateurs = bdd.Utilisateurs.ToList();
-            for (int i = 0; i < utilisateurs.Count; i++)
-            {
-                if (utilisateurs[i].Prenom == prenom && utilisateurs[i].MotDePasse == mdp)
-                {
-                    return utilisateurs[i];
-                }
-            }
-            return null;
+            string motDePasseEncode = EncodeMD5(mdp);
+            return bdd.Utilisateurs.FirstOrDefault(u => u.Prenom == prenom && u.Mdp == motDePasseEncode);
         }
 
         public bool ADejaVote(int idSondage, string idUtilisateur)
@@ -160,24 +154,39 @@ namespace ChoixResto.Models
         {
             List<Resultats> resultats = new List<Resultats>();
             List<Resto> restos = ObtientTousLesRestaurants();
-            Sondage sondage = ObtientSondage(idSondage);
-            List<Vote> votes = sondage.Votes;
-            for (int i=0; i<restos.Count; i++)
+            //Sondage sondage = ObtientSondage(idSondage);
+            //List<Vote> votes = sondage.Votes;
+            //for (int i=0; i<restos.Count; i++)
+            //{
+            //    Resultats resultat = new Resultats { Nom = restos[i].Nom, Telephone = restos[i].Telephone };
+            //    int count = 0;
+            //    for(int j =0;j<votes.Count; j++)
+            //    {
+            //        if(votes[j].Resto.Nom == resultat.Nom)
+            //        {
+            //            count++;
+            //        }
+            //    }
+            //    resultat.NombreDeVotes = count;
+            //    resultats.Add(resultat);
+            //}
+            //resultats.Sort((a, b) => (a.NombreDeVotes.CompareTo(b.NombreDeVotes)));
+            //resultats.Reverse();
+            Sondage sondage = bdd.Sondages.First(s => s.Id == idSondage);
+            foreach (IGrouping<int, Vote> grouping in sondage.Votes.GroupBy(v => v.Resto.Id))
             {
-                Resultats resultat = new Resultats { Nom = restos[i].Nom, Telephone = restos[i].Telephone };
-                int count = 0;
-                for(int j =0;j<votes.Count; j++)
-                {
-                    if(votes[j].Resto.Nom == resultat.Nom)
-                    {
-                        count++;
-                    }
-                }
-                resultat.NombreDeVotes = count;
-                resultats.Add(resultat);
+                int idRestaurant = grouping.Key;
+                Resto resto = restos.First(r => r.Id == idRestaurant);
+                int nombreDeVotes = grouping.Count();
+                resultats.Add(new Resultats { Nom = resto.Nom, Telephone = resto.Telephone, NombreDeVotes = nombreDeVotes });
             }
-            
             return resultats;
+        }
+
+        private string EncodeMD5(string motDePasse)
+        {
+            string motDePasseSel = "ChoixResto" + motDePasse + "ASP.NET MVC";
+            return BitConverter.ToString(new MD5CryptoServiceProvider().ComputeHash(ASCIIEncoding.Default.GetBytes(motDePasseSel)));
         }
     }
 }
