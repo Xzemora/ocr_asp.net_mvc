@@ -26,6 +26,7 @@
                 <div>
                     @Html.LabelFor(model => model.Telephone)
                     @Html.TextBoxFor(model => model.Telephone)
+                    @Html.ValidationMessageFor(model => model.Telephone)
                 </div>
                 <br />
                 <input type="submit" value="Modifier" />

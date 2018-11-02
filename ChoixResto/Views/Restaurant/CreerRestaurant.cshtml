@@ -12,7 +12,7 @@
     <script type="text/javascript" src="../../Scripts/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="../../Scripts/jquery.validate-vsdoc.js"></script>
     <script type="text/javascript" src="../../Scripts/jquery.validate.unobtrusive.js"></script>
-    <script type="text/javascript">
+    @*<script type="text/javascript">
         jQuery.validator.addMethod("verifcontact",
             function (value, element, params) {
                 var tel = $("#" + params.parametre1).val();
@@ -25,7 +25,7 @@
                 options.rules["verifcontact"] = options.params;
                 options.messages["verifcontact"] = options.message;
             });
-    </script>
+    </script>*@
 </head>
 <body>
     <div>
@@ -44,11 +44,11 @@
                 @Html.TextBoxFor(model => model.Telephone)
                 @Html.ValidationMessageFor(model => model.Telephone)
             </div>
-            <div>
+            @*<div>
                 @Html.LabelFor(model => model.Email)
                 @Html.TextBoxFor(model => model.Email)
                 @Html.ValidationMessageFor(model => model.Email)
-            </div>
+            </div>*@
             <br />
             <input type="submit" value="Ajouter" />
         </fieldset>

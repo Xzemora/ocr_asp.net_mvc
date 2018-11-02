@@ -26,28 +26,6 @@ namespace ChoixResto.Controllers
             return View(listeDesRestaurants);
         }
 
-    public ActionResult ModifierRestaurant(int? id)
-        {
-            if (id.HasValue)
-            {
-                Resto restaurant = dal.ObtientTousLesRestaurants().FirstOrDefault(r => r.Id == id.Value);
-                if (restaurant == null)
-                    return View("Error");
-                return View(restaurant);
-            }
-            else
-                return View("Error");
-        }
-
-        [HttpPost]
-        public ActionResult ModifierRestaurant(Resto resto)
-        {
-            if (!ModelState.IsValid)
-                return View(resto);
-            dal.ModifierRestaurant(resto.Id, resto.Nom, resto.Telephone);
-            return RedirectToAction("Index");
-        }
-
         public ActionResult CreerRestaurant()
         {
             return View();
@@ -64,6 +42,28 @@ namespace ChoixResto.Controllers
             if (!ModelState.IsValid)
                 return View(resto);
             dal.CreerRestaurant(resto.Nom, resto.Telephone);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult ModifierRestaurant(int? id)
+        {
+            if (id.HasValue)
+            {
+                Resto restaurant = dal.ObtientTousLesRestaurants().FirstOrDefault(r => r.Id == id.Value);
+                if (restaurant == null)
+                    return View("Error");
+                return View(restaurant);
+            }
+            else
+                return HttpNotFound();
+        }
+
+        [HttpPost]
+        public ActionResult ModifierRestaurant(Resto resto)
+        {
+            if (!ModelState.IsValid)
+                return View(resto);
+            dal.ModifierRestaurant(resto.Id, resto.Nom, resto.Telephone);
             return RedirectToAction("Index");
         }
     }
