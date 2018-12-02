@@ -68,8 +68,7 @@ namespace ChoixResto.Models
 
         public Utilisateur ObtenirUtilisateur(string idStr)
         {
-            int id;
-            if (int.TryParse(idStr, out id))
+            if (int.TryParse(idStr, out int id))
                 return ObtenirUtilisateur(id);
             return null;
         }

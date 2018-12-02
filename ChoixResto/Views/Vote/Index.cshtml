@@ -1,17 +1,29 @@
-﻿
+﻿@model List<ChoixResto.Models.Resto>
 @{
     Layout = null;
 }
 
-<!DOCTYPE html>
 
-<html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
 </head>
 <body>
-    <div> 
+    <div>
+        Cochez les restaurants où vous voulez bien aller. Attention, le vote est définitif !
     </div>
+    @using (Html.BeginForm("Index", "Vote"))
+    {
+        foreach (var resto in Model)
+        {
+            <div>
+                <p>@Html.LabelFor(r => r.resto.Nom)
+                @Html.LabelFor(r => r.resto.Telephone)                
+                </p>
+                
+                @Html.CheckBoxFor(r => r.resto.Nom)
+            </div>
+        }
+    }
 </body>
-</html>
+
