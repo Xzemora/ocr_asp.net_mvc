@@ -43,13 +43,13 @@ namespace ChoixResto.Tests
         public void ModifierRestaurant_CreationDUnNouveauRestaurantEtChangementNomEtTelephone_LaModificationEstCorrecteApresRechargement()
         {
             dal.CreerRestaurant("La bonne fourchette", "0102030405");
-            dal.ModifierRestaurant(1, "La bonne cuillère", null);
+            dal.ModifierRestaurant(1, "La bonne cuillère", "1122334455");
 
             List<Resto> restos = dal.ObtientTousLesRestaurants();
             Assert.IsNotNull(restos);
             Assert.AreEqual(1, restos.Count);
             Assert.AreEqual("La bonne cuillère", restos[0].Nom);
-            Assert.IsNull(restos[0].Telephone);
+            Assert.AreEqual("1122334455",restos[0].Telephone);
         }
 
         [TestMethod]

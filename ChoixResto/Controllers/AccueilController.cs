@@ -8,7 +8,6 @@ namespace ChoixResto.Controllers
 {
     public class AccueilController : Controller
     {
-        // GET: Accueil
         public ActionResult Index()
         {
             return View();
