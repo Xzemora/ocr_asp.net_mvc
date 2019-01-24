@@ -12,7 +12,10 @@ namespace ChoixResto.ViewModels
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            // à faire !
+            if (!ListeDesResto.Any(r => r.EstSelectionne))
+
+                yield return new ValidationResult("Vous devez choisir au moins un restaurant", new[] { "ListeDesResto" });
+
         }
     }
 }

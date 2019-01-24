@@ -1,4 +1,4 @@
-﻿@model List<ChoixResto.Models.Resto>
+﻿@model ChoixResto.ViewModels.RestaurantVoteViewModel
 @{
     Layout = null;
 }
@@ -14,14 +14,13 @@
     </div>
     @using (Html.BeginForm("Index", "Vote"))
     {
-        foreach (var resto in Model)
+        foreach (var resto in Model.ListeDesResto)
         {
             <div>
-                <p>@Html.LabelFor(r => r.resto.Nom)
-                @Html.LabelFor(r => r.resto.Telephone)                
-                </p>
+                @Html.LabelFor(r => resto.Id)                               
                 
-                @Html.CheckBoxFor(r => r.resto.Nom)
+                
+                @Html.CheckBoxFor(r => resto.EstSelectionne)
             </div>
         }
     }
